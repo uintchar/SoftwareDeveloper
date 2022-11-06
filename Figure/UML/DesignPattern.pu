@@ -1,0 +1,176 @@
+http://plantuml.com/en/guide
+
+@startuml Simples
+abstract Class01
+interface Class03
+
+Class01 <|-- Class02 : Generalization\n(类的继承关系)
+Class03 <|.. Class04 : Realization\n(类与接口的关系)
+Class05 --> Class06 : Association\n(单向关联)
+Class07 -- Class08 : 双向关联
+Class08 <-- Class08 : 自关联
+Class09 o-- Class10 : Aggregation\n(整体和部分的关系)
+Class11 *-- Class12 : Composition\n(整体和部分的关系)
+Class13 ..> Class14 : Dependency\n(弱关系)
+@enduml
+
+@startuml SimpleFactoryPattern
+
+note "SimpleFactoryPattern" as N1
+
+class Factory
+{ 
+  +{static} createProduct(string &productName) : AbstractProduct* 
+}
+
+interface AbstractProduct
+{
+  +Method()
+}
+
+class ConcreteProductA
+{
+  +Method()
+}
+
+class ConcreteProductB
+{
+  +Method()
+}
+
+ConcreteProductA <.. Factory
+ConcreteProductB <.. Factory
+AbstractProduct <|.. ConcreteProductA
+AbstractProduct <|.. ConcreteProductB
+' class Client
+' Client ..> Factory  
+' AbstractProduct <.. Client
+@enduml
+
+@startuml FactoryPattern
+
+note "FactoryPattern" as N1
+
+interface AbstractFactory
+{ 
+  +createProduct() : AbstractProductProduct* 
+}
+
+class ConcreteFactoryA
+{
+  +createProduct() : AbstractProductProduct*
+}
+
+class ConcreteFactoryB
+{
+  +createProduct() : AbstractProductProduct*
+}
+
+interface AbstractProduct
+{
+  +Method()
+}
+
+class ConcreteProductA
+{
+  +Method()
+}
+
+class ConcreteProductB
+{
+  +Method()
+}
+
+AbstractProduct <|.. ConcreteProductA
+AbstractProduct <|.. ConcreteProductB
+ConcreteFactoryA ..|> AbstractFactory
+ConcreteFactoryB ..|> AbstractFactory
+ConcreteProductA <.. ConcreteFactoryA
+ConcreteProductB <.. ConcreteFactoryB
+' class Client
+' Client ..> AbstractFactory  
+' AbstractProduct <.. Client
+@enduml
+
+@startuml AbstractFactoryPattern
+
+note "AbstractFactoryPattern" as N1
+
+interface AbstractFactory
+{ 
+  +createProduct1() : AbstractProduct1*
+  +createProduct2() : AbstractProduct2*
+}
+
+class ConcreteFactoryA
+{
+  +createProduct1() : AbstractProduct1*
+  +createProduct2() : AbstractProduct2*
+}
+
+class ConcreteFactoryB
+{
+  +createProduct1() : AbstractProduct1*
+  +createProduct2() : AbstractProduct2*
+}
+
+interface AbstractProduct1
+{
+  +Method()
+}
+
+class ConcreteProduct1A
+{
+  +Method()
+}
+
+class ConcreteProduct1B
+{
+  +Method()
+}
+
+interface AbstractProduct2
+{
+  +Method()
+}
+
+class ConcreteProduct2A
+{
+  +Method()
+}
+
+class ConcreteProduct2B
+{
+  +Method()
+}
+
+AbstractProduct1 <|.. ConcreteProduct1A
+AbstractProduct1 <|.. ConcreteProduct1B
+AbstractProduct2 <|.. ConcreteProduct2A
+AbstractProduct2 <|.. ConcreteProduct2B
+ConcreteProduct1A <.. ConcreteFactoryA
+ConcreteProduct2A <.. ConcreteFactoryA
+ConcreteProduct1B <.. ConcreteFactoryB
+ConcreteProduct2B <.. ConcreteFactoryB
+ConcreteFactoryA ..|> AbstractFactory
+ConcreteFactoryB ..|> AbstractFactory
+
+' class Client
+' Client ..> AbstractFactory  
+' AbstractProduct <.. Client
+@enduml
+
+@startuml Singleton
+
+note "Singleton" as N1
+
+class Singleton
+{
+  -{static} instance : Singleton*
+  -Singleton()
+  +{static} getInstance() : Singleton*
+}
+
+Singleton o-- Singleton
+
+@enduml
